@@ -1,7 +1,13 @@
 # Auto detect text files and perform LF normalization
 * text=auto
-.exe
+
+#ignorar archivo exe
+*.exe
+
+#ignorar archivo dll
 *.dll
+
 /bin/Debug/net6.0/
 
 
+/obj/

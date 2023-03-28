@@ -20,45 +20,40 @@ namespace Test_Schad.Controllers
 
         public IActionResult Index()
         {
+            if (ModelState.IsValid)
+            {
+
+            }
+
             ICustome c = new ClienteService(_configuration);
 
             var lista = c.getCustome();
 
             return View(lista);
         }
-
         public IActionResult Create()
         {
             ITypeCustome typeCust = new TipoClienteService(_configuration);
                 var result = typeCust.getCustomeType();
+                ViewBag.CustomeType = result;
 
             return View();
         }
 
-        public IActionResult ProceseCustome()
+
+        [HttpPost]
+        public IActionResult ProceseCustome(IFormCollection form)
         {
             Customer customer = new Customer();
 
-            customer.CustName = Request.Form["Name"].ToString();
+            customer.CustName = form["CustName"].ToString() ;
             customer.Adress = Request.Form["Adress"].ToString();
             customer.CustomerTypeId = Convert.ToInt32(Request.Form["customeTypeId"]);
-            
-
-
             ICustome c = new ClienteService(_configuration);
              var result = c.setAddCustome(customer);
-                
-
-
+               
             return View("index");
         }
-
-
-
-       
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+ 
     }
 }

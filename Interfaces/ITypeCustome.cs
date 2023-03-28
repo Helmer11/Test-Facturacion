@@ -6,6 +6,7 @@ namespace Test_Schad.Interfaces
     {
 
         IEnumerable<CustomerType> getCustomeType();
+        IEnumerable<CustomerType> getCustomeType(int id);
         string setAddCustomeType(CustomerType type);
         string setUpdateCustomeType(CustomerType type);
         string setDeleteCustomeType(int id);

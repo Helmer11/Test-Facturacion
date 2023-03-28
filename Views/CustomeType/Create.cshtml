@@ -1,0 +1,16 @@
+﻿@model CustomerType
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+
+<form action="/CustomeType/ProceseCustomeType" method="post">
+    <label>Name</label>
+    @Html.TextBoxFor(m => m.Description)
+    @*<input class="form-control form-control-lg" value="" type="text" name="Description" placeholder="Name" aria-label=".form-control-lg example">*@
+
+    <button type="submit" class="btn btn-primary">Add</button>
+</form>
+

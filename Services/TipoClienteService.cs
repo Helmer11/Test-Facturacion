@@ -26,7 +26,22 @@ namespace Test_Schand.Services
                 throw new Exception(ex.Message);
             }
         }
-
+        public IEnumerable<CustomerType> getCustomeType(int id)
+        {
+            try
+            {
+                var idParam = id == 0 ? id = 0 : id;
+                using (var context = new TestInvoiceContext(configuration))
+                {
+                    var query = context.CustomerTypes.Where(x => x.Id == idParam).ToList();
+                    return query;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public string setAddCustomeType(CustomerType type)
         {
             try
@@ -82,14 +97,5 @@ namespace Test_Schand.Services
                 throw new Exception(ex.Message);
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }
