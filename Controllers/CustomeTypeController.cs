@@ -40,6 +40,8 @@ namespace Test_Schad.Controllers
         
         }
 
+
+        [HttpPost]
         public IActionResult ProceseCustomeType()
         {
             CustomerType customerType = new CustomerType();
@@ -51,6 +53,15 @@ namespace Test_Schad.Controllers
 
             return View("Index");
         }
+
+        public IActionResult Delete(int id)
+        {
+            ITypeCustome t = new TipoClienteService(_configuration);
+
+            var result = t.setDeleteCustomeType(id);
+            return View("Index", result);
+        }
+
 
     }
 }

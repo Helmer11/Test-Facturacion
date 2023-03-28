@@ -2,37 +2,24 @@
 
 @{
     ViewData["Title"] = "Create";
+    
 }
     
     @using(Html.BeginForm("ProceseCustome", "Home", FormMethod.Post))
     {
     <label>Name</label>
+
     @Html.TextBoxFor(m => m.CustName);
 
     <label>Adress</label>
         @Html.TextBoxFor(m => m.Adress);
-    <select name="customeTypeId" id="perpage">
-        <option value="1">Exigente</option>
-        <option value="2">Negociador</option>
-        <option value="3">Impulsivo</option>
+    <br>
+        @Html.DropDownList("RecolectoresSelec", ViewBag.CustomeType , "Selecciona un recolector", new { @class = "form-control" })
 
-    </select>
     <input type="submit" class="btn btn-primary" value="Add">
 
  }
 
- @*
-    <input class="form-control form-control-lg" type="text" name="Name" placeholder="Name" aria-label=".form-control-lg example">
 
-
-
-    <input class="form-control form-control-lg" type="text" name="Adress" placeholder="adress" aria-label=".form-control-lg example">*@
-
-    <br />
-    
-  @*  @foreach(var items in Model)
-    {
-        @Html.DropDownList("RecolectoresSelec", items, "Selecciona un recolector", new { @class = "form-control" })
-    }*@
 
     

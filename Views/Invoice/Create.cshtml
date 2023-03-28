@@ -1,0 +1,20 @@
+﻿@model Invoice
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+@using(Html.BeginForm("", "", FormMethod.Post)){
+    
+    @Html.TextBoxFor(m => m.CustomerId)
+    
+    @Html.TextBoxFor(m => m.TotalItbis)
+    @Html.TextBoxFor(m => m.SubTotal)
+
+    @Html.TextBoxFor(m => m.Total)
+
+
+    <button type="submit" class="btn btn-primary">Add</button>
+
+}

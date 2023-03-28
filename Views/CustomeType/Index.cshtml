@@ -21,8 +21,8 @@
             <tr>
                 <th scope="row">@items.Id</th>
                 <td>@items.Description</td>
-                <td>@Html.ActionLink("Edita","Details","CustomeType", new { @items.Id })</td>
-                <td><a href="" @items.Id>eliminar</a></td>
+                <td>@Html.ActionLink("Edita","Details","CustomeType", new { @items.Id }) </td>
+                <td>@Html.ActionLink("Eliminar","Details","CustomeType", new { @items.Id })</td>
             </tr>
         }
 

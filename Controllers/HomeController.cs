@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using Test_Schad.Interfaces;
 using Test_Schad.Models;
@@ -20,22 +21,26 @@ namespace Test_Schad.Controllers
 
         public IActionResult Index()
         {
+            object lista = null ;
             if (ModelState.IsValid)
             {
-
+                ICustome c = new ClienteService(_configuration);
+                lista = c.getCustome();  
             }
-
-            ICustome c = new ClienteService(_configuration);
-
-            var lista = c.getCustome();
-
             return View(lista);
         }
         public IActionResult Create()
         {
             ITypeCustome typeCust = new TipoClienteService(_configuration);
                 var result = typeCust.getCustomeType();
-                ViewBag.CustomeType = result;
+            List<SelectListItem> lista = new List<SelectListItem>()
+                {
+                    new SelectListItem { 
+                        Text = result.FirstOrDefault().Description, 
+                        Value= result.FirstOrDefault().Id.ToString()
+                    }
+                };
+            ViewBag.CustomeType = lista;
 
             return View();
         }
@@ -47,13 +52,21 @@ namespace Test_Schad.Controllers
             Customer customer = new Customer();
 
             customer.CustName = form["CustName"].ToString() ;
-            customer.Adress = Request.Form["Adress"].ToString();
-            customer.CustomerTypeId = Convert.ToInt32(Request.Form["customeTypeId"]);
+            customer.Adress = form["Adress"].ToString();
+            customer.CustomerTypeId = Convert.ToInt32(form["customeTypeId"]);
             ICustome c = new ClienteService(_configuration);
              var result = c.setAddCustome(customer);
-               
             return View("index");
         }
  
+        public IActionResult Delete(int id)
+        {
+            ICustome c = new ClienteService(_configuration);
+            var result = c.setDeleteCustome(id);
+            return View();
+        }
+
+
+
     }
 }
