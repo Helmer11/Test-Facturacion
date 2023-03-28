@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Customer>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+
+@Html.ActionLink("Create","Create","Home")
+@Html.ActionLink("Create CustomeType","Index","CustomeType")
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Tipo Cliente</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var items in Model)
+        {
+            <tr>
+                <th scope="row">@items.Id</th>
+                <td>@items.CustName</td>
+                <td>@items.Adress</td>
+                <td>@items.CustomerTypeId</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
