@@ -11,12 +11,17 @@ namespace Test_Schad.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IConfiguration _configuration;
-        
+        ICustome _custome;
+        ITypeCustome typeCust;
+        Customer customer;
 
         public HomeController(ILogger<HomeController> logger, IConfiguration  config)
         {
             _logger = logger;
             _configuration = config;
+           _custome = new ClienteService(_configuration);
+            typeCust = new TipoClienteService(_configuration);
+            customer = new Customer();
         }
 
         public IActionResult Index()
@@ -24,15 +29,14 @@ namespace Test_Schad.Controllers
             object lista = null ;
             if (ModelState.IsValid)
             {
-                ICustome c = new ClienteService(_configuration);
-                lista = c.getCustome();  
+                lista = _custome.getCustome();  
             }
             return View(lista);
         }
         public IActionResult Create()
         {
-            ITypeCustome typeCust = new TipoClienteService(_configuration);
-                var result = typeCust.getCustomeType();
+            
+            var result = typeCust.getCustomeType();
             List<SelectListItem> lista = new List<SelectListItem>()
                 {
                     new SelectListItem { 
@@ -49,7 +53,7 @@ namespace Test_Schad.Controllers
         [HttpPost]
         public IActionResult ProceseCustome(IFormCollection form)
         {
-            Customer customer = new Customer();
+            
 
             customer.CustName = form["CustName"].ToString() ;
             customer.Adress = form["Adress"].ToString();
